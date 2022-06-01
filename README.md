@@ -1,1 +1,1 @@
-# SCRC_HomeAssitance
+# SCRC_HomeAssistance
