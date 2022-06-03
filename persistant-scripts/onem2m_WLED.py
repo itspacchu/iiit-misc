@@ -7,7 +7,7 @@ USRNAME,PASSWD = "",""
 
 IIIT_OM2M_URL_BASE = "http://onem2m.iiit.ac.in:443/~/in-cse/in-name/"
 OM2M_HEADERS = {
-    'X-M2M-Origin': 'guest:guest',
+    'X-M2M-Origin': '{USRNAME}:{PASSWD}',
     'Accept': 'application/json'
 }
 
@@ -69,9 +69,21 @@ def reColors(value,ColArr):
 
 
 if(__name__ == "__main__"):
+    if('-h' in sys.argv):
+        print("""
+        ## fetches data from onem2m server and pushes to WLED
+        onem2m_WLED.py <wled-ip> <username> <passwd> <sleep-time>
+
+        wled-ip    : IP of WLED instance
+        username   : Username of onem2m server
+        passwd     : Password for onem2m server
+        sleep-time : Sleep time between updating the WLED colors
+        """)
+        exit()
     if(len(sys.argv) != 5):
         print("All Args: <wled-ip> <username> <passwd> <sleep-time>")
         exit()
+
     USRNAME,PASSWD = sys.argv[2],sys.argv[3]
     while(True):
         print("Fetching values from onem2m\n")
