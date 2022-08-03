@@ -1,41 +1,96 @@
-<html>
-<title> Bonjour </title>
-<body>
-	<table>
-		<tr>
-			<th><img src="static/iiithlogo.png" width=auto height=64></th>
-			<th><img src="static/scrclogo.png" width=auto height=64></th>
-		</tr>
-	</table>
-	<br>
-	<hr>
-	<div>
-	[MAP GOES HERE]
-	</div>
-<br>
-<hr>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta tags -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+  <meta name="viewport" content="width=device-width" />
 
-<div>
-	<table>
-	<tr>
-	<th>
-	<div>
-		[Om2m SERVER TEMP DETAILS]
-	</div>
-	</th>
-	<th>
-	<div>
-		[AQI data goes here]
-	</div>
-	</th>
-	</tr>
-	</table>
-</div>
-<br>
-<hr>
-	<div>
-		[MISC SENSOR DATA GOES HERE]
-	</div>
-<hr>
+  <title>Elampdata</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
+</head>
+<body class="with-custom-webkit-scrollbars with-custom-css-scrollbars" data-dm-shortcut-enabled="true" data-sidebar-shortcut-enabled="false" data-set-preferred-mode-onload="false">
+  <div class="page-wrapper with-navbar">
+   <div class="sticky-alerts"></div>
+   <!--
+	<nav class="navbar justify-content-between"> 
+		<br>
+		<div class="navbar-content">
+			10:10
+		</button>
+		</div>
+		<br>
+	</nav>
+ -->
+    <div class="content-wrapper">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-6">
+					<center>
+					<img src="./static/iiithlogo.png" height=120px width="auto">
+					</center>
+				</div>
+				<div class="col-6">
+					<center>
+						<img src="./static/scrclogo.png" height=100px width="auto">
+					</center>
+				</div>
+			</div>
+
+			<br>
+
+			<div class="row">
+			  <div class="col-12">
+				  <img src="./static/map.png" height="auto" width=100%>
+			  </div>
+			</div>
+
+			<br>
+
+			<div class="row">
+			  <div class="col-6">
+					<center>
+						<h1 id="-27-c">☁ 27 °C</h1>
+						<h2 id="51-aqi-56-uv">AQI 58</h2>
+						<center>
+						<p><code>source IIIT-onem2m</code></p>
+						</center>
+					</center>
+			  </div>
+			  <br>
+			  <hr>
+			  <br>
+			  <div class="col-6">
+				  	<center>
+						<table class="table">
+							<thead>
+							  <tr>
+								<th>Node</th>
+								<th>Location</th>
+								<th>Data</th>
+							  </tr>
+							</thead>
+							<tbody>
+							  <tr>
+								<td>Solarpanel</td>
+								<td>BLKID_1</td>
+								<td>250 KW</td>
+							  </tr>
+							  <tr>
+								<td>Water Quality</td>
+								<td>BLKID_2</td>
+								<td>200 ppm</td>
+							  </tr>
+							</tbody>
+						  </table>
+				  	</center>
+			  </div>
+			</div>
+
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
 </body>
 </html>
