@@ -1,11 +1,11 @@
 /*****************************************************************************
-* | File      	:   EPD_7in5b_V2_test.c
-* | Author      :   Waveshare team
-* | Function    :   5.83inch B&C e-paper test demo
+* | File      	:   main.c
+* | Author      :   Waveshare team & Prashant Nandipati
+* | Function    :   Modified Epaper image display from cli
 * | Info        :
 *----------------
-* |	This version:   V1.0
-* | Date        :   2020-11-30
+* |	This version:   V1.0.1
+* | Date        :   2022-08-2
 * | Info        :
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -53,23 +53,15 @@ void setup_img_buffers(){
     }
     Paint_NewImage(BlackImage, EPD_7IN5B_V2_WIDTH, EPD_7IN5B_V2_HEIGHT , 0, WHITE);
     Paint_NewImage(RYImage, EPD_7IN5B_V2_WIDTH, EPD_7IN5B_V2_HEIGHT , 0, WHITE);
-
-    // Paint_SelectImage(BlackImage);
-    // Paint_Clear(WHITE);
-    // Paint_SelectImage(RYImage);
-    // Paint_Clear(WHITE);
 }
 
 
 int main(int argc,char* argv[]){
     if(argc < 2) printf("./epd blackimage.bmp redimage.bmp\n");
     setbuf(stdout, NULL);
-
     if(DEV_Module_Init()!=0) return -1;
     EPD_7IN5B_V2_Init();
     setup_img_buffers();
-
-    /** handle image drawing **/
     Paint_SelectImage(BlackImage);
     GUI_ReadBmp(argv[1], 0, 0);
     Paint_SelectImage(RYImage);
