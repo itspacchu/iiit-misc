@@ -1,3 +1,10 @@
+# The MIT License (MIT)
+
+# Copyright (c) 2015 Prashant Nandipati (prashantn@riseup.net)
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
 
 from time import sleep
 import requests,sys

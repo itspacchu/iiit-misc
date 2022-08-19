@@ -14,27 +14,17 @@
 <body class="with-custom-webkit-scrollbars with-custom-css-scrollbars" data-dm-shortcut-enabled="true" data-sidebar-shortcut-enabled="false" data-set-preferred-mode-onload="false">
   <div class="page-wrapper with-navbar">
    <div class="sticky-alerts"></div>
-   <!--
-	<nav class="navbar justify-content-between"> 
-		<br>
-		<div class="navbar-content">
-			10:10
-		</button>
-		</div>
-		<br>
-	</nav>
- -->
     <div class="content-wrapper">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-6">
 					<center>
-					<img src="./static/iiithlogo.png" height=120px width="auto">
+					<img src="https://upload.wikimedia.org/wikipedia/en/e/e1/International_Institute_of_Information_Technology%2C_Hyderabad_logo.png" height=120px width="auto">
 					</center>
 				</div>
 				<div class="col-6">
 					<center>
-						<img src="./static/scrclogo.png" height=100px width="auto">
+						<img src="https://i.imgur.com/iReJ5Tp.png" height=100px width="auto">
 					</center>
 				</div>
 			</div>
@@ -43,17 +33,20 @@
 
 			<div class="row">
 			  <div class="col-12">
-				  <img src="./static/map.png" height="auto" width=100%>
+				<iframe src="https://smartcitylivinglab.iiit.ac.in/grafana/d-solo/kyLuJXQ7z/summary_view?orgId=3&from=1659597919213&to=1660202719213&theme=light&panelId=16" width=100% height="250" frameborder="0"></iframe>
 			  </div>
 			</div>
 
 			<br>
-
 			<div class="row">
 			  <div class="col-6">
+				  <br>
+				  <br>
+				  <br>
+				  <br>
 					<center>
-						<h1 id="-27-c">☁ 27 °C</h1>
-						<h2 id="51-aqi-56-uv">AQI 58</h2>
+						<h1 id="-27-c">☁ <b>{{ AIRQ.temp }}</b> °C</h1>
+						<h5 id="51-aqi-56-uv">💧 rH <b>{{ AIRQ.hum }}</b>% | 😷 AQI <b>{{ AIRQ.AQI }}</b></h5>
 						<center>
 						<p><code>source IIIT-onem2m</code></p>
 						</center>
@@ -73,16 +66,14 @@
 							  </tr>
 							</thead>
 							<tbody>
-							  <tr>
-								<td>Solarpanel</td>
-								<td>BLKID_1</td>
-								<td>250 KW</td>
-							  </tr>
-							  <tr>
-								<td>Water Quality</td>
-								<td>BLKID_2</td>
-								<td>200 ppm</td>
-							  </tr>
+								{% for node in NODES %}
+								<tr>
+									<td> {{ node.NAME }}</td>
+									<td> {{ node.LOC }}</td>
+									<td> {{ node.DATA }} {{ node.UNIT }}</td>
+
+								  </tr>
+    							{% endfor %}
 							</tbody>
 						  </table>
 				  	</center>
