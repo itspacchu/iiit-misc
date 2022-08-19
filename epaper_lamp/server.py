@@ -39,7 +39,12 @@ def loadserver():
                     "DATA":water_flow["Total_Flow"],
                     "UNIT":"m^3"
                 }
-            ]
+            ],
+            IMAGES={
+                "iiith_logo":"https://upload.wikimedia.org/wikipedia/en/e/e1/International_Institute_of_Information_Technology%2C_Hyderabad_logo.png",
+                "scrc_logo":"https://i.imgur.com/iReJ5Tp.png",
+                "main_map":"https://i.imgur.com/Q2fvlZd.png"
+            }
     )
 
 
