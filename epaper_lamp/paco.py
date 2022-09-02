@@ -24,6 +24,15 @@
 import os,subprocess
 from PIL import Image,ImageEnhance
 from time import sleep
+from multiprocessing  import Process
+import os
+from server import *
+import requests
+import logging
+
+
+
+log = logging.getLogger(__name__)
 
 SLEEP_TIME = 30
 
@@ -48,7 +57,17 @@ def render_webpage(url:str="https://smartcitylivinglab.iiit.ac.in/home/"):
     epd("./screenshot_b.bmp")
 
 if(__name__ == "__main__"):
+    log.debug("Starting Flask Server in a different process")
+    cds = Process(target=app.run,args=("0.0.0.0","8000"))
+    cds.start()
+    log.debug("Starting epaper display connection")
     while(True):
-        render_webpage("http://0.0.0.0:8000/")
-        print(f"Refreshing screen in {SLEEP_TIME} seconds")
-        sleep(SLEEP_TIME)
+        try:
+            log.debug("Connecting to flask server")
+            render_webpage("http://0.0.0.0:8000/")
+            log.debug(f"Refreshing screen in {SLEEP_TIME} seconds")
+            sleep(SLEEP_TIME)
+        except Exception as e:
+            log.error(f"Exception {e} has occured \n Stopping Server process and epaper process")
+            cds.join()
+            log.error("exitting")

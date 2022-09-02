@@ -58,3 +58,5 @@ clean:
 	rm $(DIR_BIN)/*.* 
 	rm $(TARGET) 
 
+runserver:
+        python3 ./server.py
