@@ -55,19 +55,19 @@ def loadserver():
             },
             NODES=[
                 {
-                    "NAME":"Solar Power",
+                    "NAME":"Solar Power Generated",
                     "LOC":"VINDHYA",
                     "DATA":solar_node["energy"],
                     "UNIT":"kwh"
                 },
                 {
-                    "NAME":"Water Quality",
+                    "NAME":"Water Quality - TDS",
                     "LOC":"PUMP HOUSE 03",
                     "DATA":water_node["Compensated_TDS_value"],
                     "UNIT":"ppm"
                 },
                 {
-                    "NAME":"Water Flow",
+                    "NAME":"Water Flow Measured",
                     "LOC":"PUMP HOUSE 02",
                     "DATA":water_flow["Total_Flow"],
                     "UNIT":"m^3"
