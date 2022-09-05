@@ -42,8 +42,6 @@
 			  <div class="col-6">
 				  <br>
 				  <br>
-				  <br>
-				  <br>
 					<center>
 						<h1 id="-27-c">☁ <b>{{ AIRQ.temp }}</b> °C</h1>
 						<h5 id="51-aqi-56-uv">💧 rH <b>{{ AIRQ.hum }}</b>% | 😷 AQI <b>{{ AIRQ.AQI }}</b></h5>
@@ -58,18 +56,11 @@
 			  <div class="col-6">
 				  	<center>
 						<table class="table">
-							<thead>
-							  <tr>
-								<th>Node</th>
-								<th>Location</th>
-								<th>Data</th>
-							  </tr>
-							</thead>
+							<br>
 							<tbody>
 								{% for node in NODES %}
 								<tr>
 									<td> {{ node.NAME }}</td>
-									<td> {{ node.LOC }}</td>
 									<td> {{ node.DATA }} {{ node.UNIT }}</td>
 
 								  </tr>
