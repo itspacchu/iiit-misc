@@ -1,0 +1,13 @@
+[Unit]
+Description=Epaper Handler
+
+[Service]
+Type=simple
+StartLimitInterval=30
+WorkingDirectory=/home/paco/iiit-misc/epaper_lamp
+ExecStart=/home/paco/iiit-misc/epaper_lamp/paco.py
+Restart=on-failure
+StartLimitBurst=2
+
+[Install]
+WantedBy=multi-user.target
