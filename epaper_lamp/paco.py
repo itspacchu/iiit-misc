@@ -31,10 +31,12 @@ import requests
 import logging
 
 
+CONTRAST = 100
 
 log = logging.getLogger(__name__)
 
 SLEEP_TIME = 30
+
 
 def change_contrast(img, level):
     factor = (259 * (level + 255)) / (255 * (259 - level))
@@ -44,13 +46,13 @@ def change_contrast(img, level):
 
 
 def epd(blackimg:str="./images/null.bmp",redimg:str="./images/null.bmp"):
-    subprocess.run(["sudo","./epd", blackimg, redimg])
+    subprocess.run(["epd", blackimg, redimg])
 
 def render_webpage(url:str="https://smartcitylivinglab.iiit.ac.in/home/"):
     #chrome --headless --disable-gpu --screenshot --window-size=1280,1696 https://www.chromestatus.com/
-    subprocess.run(['chromium','--headless','--disable-gpu','--screenshot','--window-size=480,800',url])
+    subprocess.run(['chromium','--headless','--disable-gpu','--screenshot','--window-size=480,800','--no-sandbox',url])
     webpage = Image.open("screenshot.png").convert("RGB").transpose(Image.ROTATE_90)
-    webpage = change_contrast(webpage,100)
+    webpage = change_contrast(webpage,CONTRAST)
     #r = webpage.split()[0]
     #r.point( lambda p: 255 - (10*p) if ((p >= 200) and (p < 240)) else 255 ).convert("1").save("screenshot_r.bmp")
     webpage.convert("1").save("screenshot_b.bmp")

@@ -59,4 +59,4 @@ clean:
 	rm $(TARGET) 
 
 runserver:
-        python3 ./server.py
+	python3 ./paco.py

@@ -24,6 +24,7 @@ from time import sleep
 import requests
 from random import randint
 
+
 class Sensor:
     USRNAME,PASSWD = "guest","guest"
     IIIT_OM2M_URL_BASE = "http://onem2m.iiit.ac.in:443/~/in-cse/in-name/"
@@ -39,7 +40,6 @@ class Sensor:
 
     def FETCH_URL(self,node_loc="AE-SR",node_name="SR-AQ"):
         return f"{self.IIIT_OM2M_URL_BASE}{node_loc}/{node_name}/Data/la"
-
 
     def fetch_data(self,url:str):
         response = requests.get(url=url, headers=self.OM2M_HEADERS)

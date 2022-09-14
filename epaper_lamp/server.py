@@ -42,9 +42,9 @@ def loadserver():
     solar_node = SolarNode("AE-SL","SL-VN03-00").getData()
     water_node = WaterQuality("AE-WM/WM-WD","WM-WD-PH02-00").getData()
     water_flow = WaterFlow("AE-WM/WM-WF","WM-WF-PH03-02").getData()
-    logg.debug("handling speech now")
-    thanksfortedtalk = "Welcome to Smart Pole, The Current temperature is " + str(round(aqi_node['temp'])) + " degree Centigrade , with Relative Humidity of " + str(round(aqi_node['rH'])) + "%, The current Air Quality is " + str(round(aqi_node['AQI']))
-    subprocess.run(['google_speech','-l','en-ca',thanksfortedtalk])
+    #logg.debug("handling speech now")
+    #thanksfortedtalk = "Welcome to Smart Pole, The Current temperature is " + str(round(aqi_node['temp'])) + " degree Centigrade , with Relative Humidity of " + str(round(aqi_node['rH'])) + "%, The current Air Quality is " + str(round(aqi_node['AQI']))
+    #subprocess.run(['google_speech','-l','en-ca',thanksfortedtalk])
     return render_template(
         "index.html",
             AIRQ = {
