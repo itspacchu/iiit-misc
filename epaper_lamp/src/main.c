@@ -57,7 +57,10 @@ void setup_img_buffers(){
 
 
 int main(int argc,char* argv[]){
-    if(argc < 2) printf("./epd blackimage.bmp redimage.bmp\n");
+    if(argc < 2) {
+              printf("./epd blackimage.bmp redimage.bmp\n");
+              EPD_7IN5_V2_ClearBlack();
+    }
     setbuf(stdout, NULL);
     if(DEV_Module_Init()!=0) return -1;
     EPD_7IN5B_V2_Init();
@@ -68,7 +71,7 @@ int main(int argc,char* argv[]){
     GUI_ReadBmp(argv[2], 0, 0);
     EPD_7IN5B_V2_Display(BlackImage, RYImage);
     DEV_Delay_ms(100);
-
+    EPD_7IN5_V2_Sleep();
     return 0;
 }
 

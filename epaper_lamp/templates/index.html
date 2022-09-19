@@ -8,7 +8,11 @@
   <meta name="viewport" content="width=device-width" />
 
   <title>Elampdata</title>
-
+ <style>
+	body {
+    		font-family: "Bookerly";
+	}
+</style>
   <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
 </head>
 <body class="with-custom-webkit-scrollbars with-custom-css-scrollbars" data-dm-shortcut-enabled="true" data-sidebar-shortcut-enabled="false" data-set-preferred-mode-onload="false">
@@ -43,8 +47,8 @@
 				  <br>
 				  <br>
 					<center>
-						<h1 id="-27-c">☁ <b>{{ AIRQ.temp }}</b> °C</h1>
-						<h5 id="51-aqi-56-uv">💧 rH <b>{{ AIRQ.hum }}</b>% | 😷 AQI <b>{{ AIRQ.AQI }}</b></h5>
+						<h1 class="bob" id="-27-c">☁ <b> {{ AIRQ.temp }}</b> °C</h1>
+						<h5 class="bob" id="51-aqi-56-uv">rH <b>{{ AIRQ.hum }}</b>% | 😷 AQI <b>{{ AIRQ.AQI }}</b></h5>
 						<center>
 						<p><code>IIIT-ONEM2M</code></p>
 						</center>
@@ -60,8 +64,8 @@
 							<tbody>
 								{% for node in NODES %}
 								<tr>
-									<td> {{ node.NAME }}</td>
-									<td> {{ node.DATA }} {{ node.UNIT }}</td>
+									<td><b class="bob"> {{ node.NAME }} </b></td>
+									<td> <b class="bob"> {{ node.DATA }} {{ node.UNIT }} </b></td>
 
 								  </tr>
     							{% endfor %}

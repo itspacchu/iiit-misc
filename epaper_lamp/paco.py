@@ -31,13 +31,18 @@ import requests
 import logging
 
 
-CONTRAST = 100
+# Settings
 
+CONTRAST = 100 
+SLEEP_TIME = 300 #seconds
+
+
+# Enable logging 
 log = logging.getLogger(__name__)
 
-SLEEP_TIME = 30
-
-
+"""
+Point process constrast level on image
+"""
 def change_contrast(img, level):
     factor = (259 * (level + 255)) / (255 * (259 - level))
     def contrast(c):
@@ -45,9 +50,20 @@ def change_contrast(img, level):
     return img.point(contrast)
 
 
+"""
+Wrapper for epd exec
+blackimg= Image to show on black parts 
+redimg= Image to show on red parts
+
+Only Bitmap images of 1 bit color are supported
+"""
 def epd(blackimg:str="./images/null.bmp",redimg:str="./images/null.bmp"):
     subprocess.run(["epd", blackimg, redimg])
 
+""" 
+Render webpage
+url : string input for url
+"""
 def render_webpage(url:str="https://smartcitylivinglab.iiit.ac.in/home/"):
     #chrome --headless --disable-gpu --screenshot --window-size=1280,1696 https://www.chromestatus.com/
     subprocess.run(['chromium','--headless','--disable-gpu','--screenshot','--window-size=480,800','--no-sandbox',url])
@@ -56,8 +72,11 @@ def render_webpage(url:str="https://smartcitylivinglab.iiit.ac.in/home/"):
     #r = webpage.split()[0]
     #r.point( lambda p: 255 - (10*p) if ((p >= 200) and (p < 240)) else 255 ).convert("1").save("screenshot_r.bmp")
     webpage.convert("1").save("screenshot_b.bmp")
-    epd("./screenshot_b.bmp")
-
+    epd("./images/null.bmp","./screenshot_b.bmp")
+    #epd("./screenshot_b.bmp")
+"""
+main event loop
+"""
 if(__name__ == "__main__"):
     log.debug("Starting Flask Server in a different process")
     cds = Process(target=app.run,args=("0.0.0.0","8000"))

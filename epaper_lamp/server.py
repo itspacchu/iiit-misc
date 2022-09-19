@@ -75,7 +75,7 @@ def loadserver():
             ],
             IMAGES={
                 "iiith_logo":"https://upload.wikimedia.org/wikipedia/en/e/e1/International_Institute_of_Information_Technology%2C_Hyderabad_logo.png",
-                "scrc_logo":"https://i.imgur.com/iReJ5Tp.png",
+                "scrc_logo":"https://i.imgur.com/okNJq1H.png",
                 "wisun_logo":"https://www.st.com/content/dam/category-pages/wireless-connectivity/logos/wisun-logo.png",
                 "main_map":"https://i.imgur.com/ErhKofl.png"
             }
