@@ -59,8 +59,9 @@ class Sensor:
                 except ValueError:
                     jsonDat[enums[i]] = -1
             return jsonDat
-        except ValueError:
-            return {0}
+        except ValueError as e:
+            print(f"Error Fetching Values {e}")
+            return {}
 
     def remap(self,value,old_min,old_max,new_min,new_max):
         """

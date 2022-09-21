@@ -38,7 +38,7 @@ def handle_music():
 
 @app.route("/")
 def loadserver():
-    aqi_node = AirQuality("AE-AQ","AQ-FG00-00").getData()
+    aqi_node = AirQuality("AE-AQ","AQ-AD95-00").getData()
     solar_node = SolarNode("AE-SL","SL-VN03-00").getData()
     water_node = WaterQuality("AE-WM/WM-WD","WM-WD-PH02-00").getData()
     water_flow = WaterFlow("AE-WM/WM-WF","WM-WF-PH03-02").getData()
