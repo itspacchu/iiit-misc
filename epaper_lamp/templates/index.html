@@ -44,17 +44,16 @@
 			<br>
 			<div class="row">
 			  <div class="col-6">
-				  <br>
-				  <br>
+				<br>
 					<center>
 						<h1 class="bob" id="-27-c">☁ <b> {{ AIRQ.temp }}</b> °C</h1>
-						<h5 class="bob" id="51-aqi-56-uv">rH <b>{{ AIRQ.hum }}</b>% | 😷 AQI <b>{{ AIRQ.AQI }}</b></h5>
+						<h5 class="bob" id="51-aqi-56-uv">rH <b>{{ AIRQ.hum }}</b>% | ≟ AQI <b>{{ AIRQ.AQI }}</b></h5>
 						<center>
-						<p><code>{{ PACCHU.lux }} lumens | {{ PACCHU.dB }} dB</code></p>
+						<h5><code>✺ {{ PACCHU.lux }} lux</code></h5>
+						<h5><code>⋊ {{ PACCHU.dB }} dB</code></h5>
 						</center>
 					</center>
 			  </div>
-			  <br>
 			  <hr>
 			  <br>
 			  <div class="col-6">
@@ -64,10 +63,10 @@
 							<tbody>
 								{% for node in NODES %}
 								<tr>
-									<td><b class="bob"> {{ node.NAME }} </b></td>
-									<td> <b class="bob"> {{ node.DATA }} {{ node.UNIT }} </b></td>
-
-								  </tr>
+									<td> {{ node.NAME }}</td>
+									<td> {{ node.DATA }} {{ node.UNIT }}</td>
+								 </tr>
+                                                                 <hr>
     							{% endfor %}
 							</tbody>
 						  </table>

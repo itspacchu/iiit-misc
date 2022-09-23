@@ -33,8 +33,8 @@ import logging
 
 # Settings
 
-CONTRAST = 100 
-SLEEP_TIME = 15 #seconds
+CONTRAST = 250
+SLEEP_TIME = 20 #seconds
 
 
 # Enable logging 
@@ -65,18 +65,21 @@ Render webpage
 url : string input for url
 """
 def render_webpage(url:str="https://smartcitylivinglab.iiit.ac.in/home/"):
-    #chrome --headless --disable-gpu --screenshot --window-size=1280,1696 https://www.chromestatus.com/
     subprocess.run(['chromium','--headless','--disable-gpu','--screenshot','--window-size=480,800','--no-sandbox',url])
     webpage = Image.open("screenshot.png").convert("RGB").transpose(Image.ROTATE_90)
     webpage = change_contrast(webpage,CONTRAST)
     #r = webpage.split()[0]
     #r.point( lambda p: 255 - (10*p) if ((p >= 200) and (p < 240)) else 255 ).convert("1").save("screenshot_r.bmp")
     webpage.convert("1").save("screenshot_b.bmp")
-    epd("./images/null.bmp","./screenshot_b.bmp")
-    #epd("./screenshot_b.bmp")
+    #epd("./images/null.bmp","./screenshot_b.bmp")
+    epd("./screenshot_b.bmp")
 
 def start_save():
     os.system('bash -c "./camera_stream_saver.sh"')
+
+def db_save():
+    os.seteuid(1000)
+    os.system('./db_save.sh')
 """
 main event loop
 """
@@ -85,8 +88,13 @@ if(__name__ == "__main__"):
     cds = Process(target=app.run,args=("0.0.0.0","8000"))
     log.debug("Starting Camera Stream saver")
     csv = Process(target=start_save)
+
+    # Handle multiple processes
+    log.debug("\n\n-- Starting multiple processes to handle things --\n\n")
     csv.start()
     cds.start()
+    
+    # Event Loop
     log.debug("Starting epaper display connection")
     while(True):
         try:

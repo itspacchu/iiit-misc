@@ -5,11 +5,16 @@ import os
 import logging
 from processing import computeIntensity
 import subprocess
+#from ctypes import CDLL
+from soundmeter import sound_dB
 
 # LUX LINE FITTING
 SCALE_LUX = 9
 DC_LUX = 8
 
+#ALSA_SOUND_METER SHARED
+#ALSA_SO_FILE = "/home/paco/iiit-misc/epaper_lamp/bin/sound_meter.so"
+#ALSA_WRAP = CDLL(ALSA_SO_FILE)
 
 logg = logging.getLogger(__name__)
 
@@ -20,9 +25,7 @@ app = Flask(__name__,
 
 def handle_sounddb():
     os.seteuid(65534)
-    os.system("/usr/bin/bash -c \"sound_meter > /tmp/soundv\"")
     dB = 0
-    os.system('./db_save.sh')
     with open("./soundv","rb") as sval:
         dB = sval.readline().decode("utf-8")
     ret = ""
@@ -53,7 +56,6 @@ def handle_music():
         subprocess.run(['ffplay',filename,'-nodisp'])
         return "Playing Music"
 
-
 @app.route("/")
 def loadserver():
     aqi_node = AirQuality("AE-AQ","AQ-AD95-00").getData()
@@ -79,21 +81,21 @@ def loadserver():
             },
             NODES=[
                 {
-                    "NAME":"Solar Power Generated",
+                    "NAME":"Solar Power",
                     "LOC":"VINDHYA",
                     "DATA":solar_node["energy"],
                     "UNIT":"kwh"
                 },
                 {
-                    "NAME":"Water Quality - TDS",
+                    "NAME":"TDS ✜",
                     "LOC":"PUMP HOUSE 03",
                     "DATA":water_node["Compensated_TDS_value"],
                     "UNIT":"ppm"
                 },
                 {
-                    "NAME":"Water Flow Measured",
+                    "NAME":"Water flow ≋",
                     "LOC":"PUMP HOUSE 02",
-                    "DATA":water_flow["Total_Flow"],
+                    "DATA":int(float(water_flow["Total_Flow"])),
                     "UNIT":"m^3"
                 }
             ],
