@@ -34,7 +34,7 @@ import logging
 # Settings
 
 CONTRAST = 100 
-SLEEP_TIME = 300 #seconds
+SLEEP_TIME = 15 #seconds
 
 
 # Enable logging 
@@ -74,12 +74,18 @@ def render_webpage(url:str="https://smartcitylivinglab.iiit.ac.in/home/"):
     webpage.convert("1").save("screenshot_b.bmp")
     epd("./images/null.bmp","./screenshot_b.bmp")
     #epd("./screenshot_b.bmp")
+
+def start_save():
+    os.system('bash -c "./camera_stream_saver.sh"')
 """
 main event loop
 """
 if(__name__ == "__main__"):
     log.debug("Starting Flask Server in a different process")
     cds = Process(target=app.run,args=("0.0.0.0","8000"))
+    log.debug("Starting Camera Stream saver")
+    csv = Process(target=start_save)
+    csv.start()
     cds.start()
     log.debug("Starting epaper display connection")
     while(True):
@@ -91,4 +97,5 @@ if(__name__ == "__main__"):
         except Exception as e:
             log.error(f"Exception {e} has occured \n Stopping Server process and epaper process")
             cds.join()
+            csv.join()
             log.error("exitting")
