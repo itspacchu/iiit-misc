@@ -5,16 +5,10 @@ import os
 import logging
 from processing import computeIntensity
 import subprocess
-#from ctypes import CDLL
 from soundmeter import sound_dB
 
-# LUX LINE FITTING
 SCALE_LUX = 9
 DC_LUX = 8
-
-#ALSA_SOUND_METER SHARED
-#ALSA_SO_FILE = "/home/paco/iiit-misc/epaper_lamp/bin/sound_meter.so"
-#ALSA_WRAP = CDLL(ALSA_SO_FILE)
 
 logg = logging.getLogger(__name__)
 
@@ -70,9 +64,6 @@ def loadserver():
     water_flow = WaterFlow("AE-WM/WM-WF","WM-WF-PH03-02").getData()
     sound_intensity = handle_sounddb()
     lux = computeIntensity("./frames/capture.jpg")/SCALE_LUX + DC_LUX
-    #logg.debug("handling speech now")
-    #thanksfortedtalk = "Welcome to Smart Pole, The Current temperature is " + str(round(aqi_node['temp'])) + " degree Centigrade , with Relative Humidity of " + str(round(aqi_node['rH'])) + "%, The current Air Quality is " + str(round(aqi_node['AQI']))
-    #subprocess.run(['google_speech','-l','en-ca',thanksfortedtalk])
     return render_template(
         "index.html",
             PACCHU = {
