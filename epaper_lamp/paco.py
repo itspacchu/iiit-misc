@@ -34,7 +34,7 @@ import logging
 # Settings
 
 CONTRAST = 250
-SLEEP_TIME = 15 #seconds
+SLEEP_TIME = 300 #seconds
 
 
 # Enable logging 
