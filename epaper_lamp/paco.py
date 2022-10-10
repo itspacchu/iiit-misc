@@ -34,7 +34,7 @@ import logging
 # Settings
 
 CONTRAST = 250
-SLEEP_TIME = 15 #seconds
+SLEEP_TIME = 300 #seconds
 
 
 # Enable logging 
@@ -72,8 +72,9 @@ def render_webpage(url:str="https://smartcitylivinglab.iiit.ac.in/home/"):
     #r.point( lambda p: 255 - (10*p) if ((p >= 200) and (p < 240)) else 255 ).convert("1").save("screenshot_r.bmp")
     webpage.convert("1").save("screenshot_b.bmp")
     #epd("./images/null.bmp","./screenshot_b.bmp")
-    epd("./screenshot_b.bmp")
-    os.system("./screenshot_b.bmp")
+    epd(f"{os.getcwd()}/screenshot_b.bmp")
+    os.remove(f"{os.getcwd()}/screenshot_b.bmp") # remove screenshots 
+
 
 def start_save():
     os.system('bash -c "./camera_stream_saver.sh"')

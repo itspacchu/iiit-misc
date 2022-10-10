@@ -154,7 +154,7 @@ def loadwisun():
                 "scrc_logo":"https://i.imgur.com/okNJq1H.png",
 		"wisun_logo":"https://news.silabs.com/image/silicon-labs-black-2014-275x200px_newsroom-logo-page2.png",
                 "main_map":"https://i.imgur.com/ErhKofl.png",
-                "wisun_map":"https://i.imgur.com/E8EefRZ.png"
+                "wisun_map":"https://i.imgur.com/0sTxR3e.png"
             }
     )
 
