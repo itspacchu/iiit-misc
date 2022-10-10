@@ -1,0 +1,30 @@
+esphome:
+  name: scrc-wifi
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "p3u1/dpSoeIj4i9z+FpfPh8QjJdnBCx16mk44VGtW2c="
+
+ota:
+  password: "50a50574002f9073fa6c0a71e5964013"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Scrc-Wifi Fallback Hotspot"
+    password: "LHh43x8anrbu"
+
+captive_portal:
+    
