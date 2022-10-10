@@ -26,8 +26,13 @@ from random import randint
 
 
 class Sensor:
+    """
+    Main Sensor class for onem2m handling
+    USRNAME,PASSWD: properties can be modified
+    OM2M_URL_BASE : to point to onem2m server
+    """
     USRNAME,PASSWD = "guest","guest"
-    IIIT_OM2M_URL_BASE = "http://onem2m.iiit.ac.in:443/~/in-cse/in-name/"
+    OM2M_URL_BASE = ["https://onem2m.iiit.ac.in/~/in-cse/in-name/","http://onem2m.iiit.ac.in:443/~/in-cse/in-name/"]
 
     OM2M_HEADERS = {
         'X-M2M-Origin': 'guest:guest',
@@ -39,7 +44,7 @@ class Sensor:
         self.node = node
 
     def FETCH_URL(self,node_loc="AE-SR",node_name="SR-AQ"):
-        return f"{self.IIIT_OM2M_URL_BASE}{node_loc}/{node_name}/Data/la"
+        return f"{self.OM2M_URL_BASE[0]}{node_loc}/{node_name}/Data/la"
 
     def fetch_data(self,url:str):
         response = requests.get(url=url, headers=self.OM2M_HEADERS)
