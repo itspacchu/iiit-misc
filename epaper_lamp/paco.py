@@ -40,31 +40,31 @@ SLEEP_TIME = 300 #seconds
 # Enable logging 
 log = logging.getLogger(__name__)
 
-"""
-Point process constrast level on image
-"""
 def change_contrast(img, level):
+    """
+    Point process constrast level on image
+    """
     factor = (259 * (level + 255)) / (255 * (259 - level))
     def contrast(c):
         return 128 + factor * (c - 128)
     return img.point(contrast)
 
-
-"""
-Wrapper for epd exec
-blackimg= Image to show on black parts 
-redimg= Image to show on red parts
-
-Only Bitmap images of 1 bit color are supported
-"""
 def epd(blackimg:str="./images/null.bmp",redimg:str="./images/null.bmp"):
+    """
+    Wrapper for epd exec
+    blackimg= Image to show on black parts 
+    redimg= Image to show on red parts
+
+    Only Bitmap images of 1 bit color are supported
+    """
     subprocess.run(["epd", blackimg, redimg])
 
-""" 
-Render webpage
-url : string input for url
-"""
+
 def render_webpage(url:str="https://smartcitylivinglab.iiit.ac.in/home/"):
+    """ 
+    Render webpage
+    url : string input for url
+    """
     subprocess.run(['chromium','--headless','--disable-gpu','--screenshot','--window-size=480,800','--no-sandbox',url])
     webpage = Image.open("screenshot.png").convert("RGB").transpose(Image.ROTATE_90)
     webpage = change_contrast(webpage,CONTRAST)
@@ -75,16 +75,18 @@ def render_webpage(url:str="https://smartcitylivinglab.iiit.ac.in/home/"):
     epd(f"{os.getcwd()}/screenshot_b.bmp")
     os.remove(f"{os.getcwd()}/screenshot_b.bmp") # remove screenshots 
 
+
 def start_save():
     os.system('bash -c "./camera_stream_saver.sh"')
 
 def db_save():
     os.seteuid(1000)
     os.system('./db_save.sh')
-"""
-main event loop
-"""
+
 if(__name__ == "__main__"):
+    """
+    main event loop
+    """
     log.debug("Starting Flask Server in a different process")
     cds = Process(target=app.run,args=("0.0.0.0","8000"))
     log.debug("Starting Camera Stream saver")
