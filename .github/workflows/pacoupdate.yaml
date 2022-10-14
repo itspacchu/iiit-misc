@@ -5,11 +5,42 @@ on:
       - main
 
 jobs:
-  deploy:
+  update_base:
     runs-on: self-hosted
-
     steps:
     - uses: actions/checkout@v2
+
+  restart_camera_streamer:
+    runs-on: self-hosted
+    needs: update_base
+    steps:
+    - name: Restart mjpeg streamer service
+      run: sudo systemctl restart camerastreamer.service
+    - name: check status
+      run: sudo systemctl status camerastreamer.service
+
+  restart_camera_saver:
+    runs-on: self-hosted
+    needs: restart_camera_streamer
+    steps:
+    - name: Restart mjpeg streamer service
+      run: sudo systemctl restart camerasaver.service
+    - name: check status
+      run: sudo systemctl status camerasaver.service
+
+  restart_epaper:
+    runs-on: self-hosted
+    needs: update_base,restart_camera_streamer,restart_camera_saver
+    steps:
     - name: Restart Service
       run: sudo systemctl restart epaper.service
+    - name: Restart Service
+      run: sudo systemctl status epaper.service
+    - name: Ping Camera server
+      run: ping -n 5 "https://localhost:8080/uwu.html"
+    - name: Ping epaper server
+      run: ping -n 5 "https://localhost:8000/"
+    - name: Fin
+      run: echo "Done" & free
 
+  

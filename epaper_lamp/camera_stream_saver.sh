@@ -1,0 +1,2 @@
+#!/bin/bash
+vlc -I dummy http://192.168.1.164:8080/?action=stream --video-filter=scene --vout=dummy --scene-format=jpg --scene-ratio=100 --scene-prefix=capture  --scene-replace --scene-path=$(pwd)/frames ls

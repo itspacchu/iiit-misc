@@ -75,7 +75,7 @@ def loadserver():
     sound_intensity = handle_sounddb()
     rain_check = "Today there might be a high chance of rain" if(int(aqi_node["rH"]) > 70 and round(aqi_node["temp"]) < 30) else "Today there is very low chance of rain"
     logg.debug("handling speech now")
-    thanksfortedtalk = "Welcome to Smart Pole, The Current temperature is " + str(round(aqi_node['temp'])) + " degree Centigrade , with Relative Humidity of " + str(round(aqi_node['rH'])) + "%, The current Air Quality is " + str(round(aqi_node["AQI"]) + "," + rain_check
+    thanksfortedtalk = "Welcome to Smart Pole, The Current temperature is " + str(round(aqi_node['temp'])) + " degree Centigrade , with Relative Humidity of " + str(round(aqi_node['rH'])) + "%, The current Air Quality is " + str(round(aqi_node["AQI"])) + "," + rain_check
     subprocess.run(['sudo','google_speech','-l','en-ca',thanksfortedtalk])
     lux = computeIntensity("./frames/capture.jpg")/SCALE_LUX + DC_LUX
 

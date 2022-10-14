@@ -72,23 +72,12 @@ def render_webpage(url:str="https://smartcitylivinglab.iiit.ac.in/home/"):
     epd(f"{os.getcwd()}/screenshot_b.bmp")
     os.remove(f"{os.getcwd()}/screenshot_b.bmp") # remove screenshots 
 
-
-def start_save():
-    os.system('bash -c "./camera_stream_saver.sh"')
-
-def db_save():
-    os.seteuid(1000)
-    os.system('./db_save.sh')
-
 if(__name__ == "__main__"):
     log.debug("Starting Flask Server in a different process")
     cds = Process(target=app.run,args=("0.0.0.0","8000"))
-    log.debug("Starting Camera Stream saver")
-    csv = Process(target=start_save)
 
     # Handle multiple processes
     log.debug("\n\n-- Starting multiple processes to handle things --\n\n")
-    csv.start()
     cds.start()
     
     # Event Loop
@@ -102,5 +91,4 @@ if(__name__ == "__main__"):
         except Exception as e:
             log.error(f"Exception {e} has occured \n Stopping Server process and epaper process")
             cds.join()
-            csv.join()
             log.error("exitting")
