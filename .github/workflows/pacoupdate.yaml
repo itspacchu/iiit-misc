@@ -21,7 +21,7 @@ jobs:
 
   restart_camera_saver:
     runs-on: self-hosted
-    needs: restart_camera_streamer
+    needs: update_base restart_camera_streamer
     steps:
     - name: Restart mjpeg streamer service
       run: sudo systemctl restart camerasaver.service
@@ -30,7 +30,7 @@ jobs:
 
   restart_epaper:
     runs-on: self-hosted
-    needs: update_base,restart_camera_streamer,restart_camera_saver
+    needs: update_base restart_camera_streamer restart_camera_saver
     steps:
     - name: Restart Service
       run: sudo systemctl restart epaper.service
