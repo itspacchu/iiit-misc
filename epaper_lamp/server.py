@@ -2,6 +2,7 @@
 from flask import Flask,render_template,request
 from PIL import Image,ImageStat
 from onem2m import *
+from math import sqrt
 import os
 import logging
 # from processing import computeIntensity
@@ -25,7 +26,7 @@ def computeIntensity(imgPath):
     im = Image.open(imgPath)
     stat = ImageStat.Stat(im)
     r,g,b = stat.mean
-    return math.sqrt(0.241*(r**2) + 0.691*(g**2) + 0.068*(b**2))
+    return sqrt(0.241*(r**2) + 0.691*(g**2) + 0.068*(b**2))
 
 def handle_sounddb():
     os.seteuid(65534)

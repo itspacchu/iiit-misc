@@ -44,7 +44,7 @@ class Sensor:
         self.node = node
 
     def FETCH_URL(self,node_loc="AE-SR",node_name="SR-AQ"):
-        return f"{self.OM2M_URL_BASE[0]}{node_loc}/{node_name}/Data/la"
+        return f"{self.OM2M_URL_BASE[1]}{node_loc}/{node_name}/Data/la"
 
     def fetch_data(self,url:str):
         response = requests.get(url=url, headers=self.OM2M_HEADERS)
