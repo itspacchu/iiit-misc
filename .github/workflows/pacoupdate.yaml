@@ -36,10 +36,6 @@ jobs:
       run: sudo systemctl restart epaper.service
     - name: Restart Service
       run: sudo systemctl status epaper.service
-    - name: Ping Camera server
-      run: ping -n 5 "https://localhost:8080/uwu.html"
-    - name: Ping epaper server
-      run: ping -n 5 "https://localhost:8000/"
     - name: Fin
       run: echo "Done" & free
 
