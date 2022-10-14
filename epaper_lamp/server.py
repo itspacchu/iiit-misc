@@ -83,7 +83,7 @@ def loadserver():
     sound_intensity = handle_sounddb()
 
     sayData(aqi_node,solar_node,water_node,water_flow)
-    lux = computeIntensity("/home/frames/capture.jpg")/SCALE_LUX + DC_LUX
+    lux = computeIntensity("/home/paco/frames/capture.jpg")/SCALE_LUX + DC_LUX
 
     return render_template(
         "index.html",
