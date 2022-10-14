@@ -5,7 +5,8 @@ import os
 import logging
 from processing import computeIntensity
 import subprocess
-from soundmeter import sound_dB
+
+# from soundmeter import sound_dB # Broken cutils
 
 SCALE_LUX = 9
 DC_LUX = 8
@@ -16,6 +17,9 @@ app = Flask(__name__,
             static_url_path='', 
             static_folder='./static',
             template_folder='./templates')
+
+
+
 
 def handle_sounddb():
     os.seteuid(65534)
@@ -63,7 +67,13 @@ def loadserver():
     water_node = WaterQuality("AE-WM/WM-WD","WM-WD-PH02-00").getData()
     water_flow = WaterFlow("AE-WM/WM-WF","WM-WF-PH03-02").getData()
     sound_intensity = handle_sounddb()
+    rain_check = "Today there might be a high chance of rain" if(int(aqi_node["rH"]) > 70 and round(aqi_node["temp"]) < 30) else "Today there is very low chance of rain"
+    logg.debug("handling speech now")
+    thanksfortedtalk = "Welcome to Smart Pole, The Current temperature is " + str(round(aqi_node['temp'])) + " degree Centigrade , with Relative Humidity of " + str(round(aqi_node['rH'])) + "%, The current Air Quality is " + str(round(aqi_node["AQI"]) + "," + raincheck
+    subprocess.run(['sudo','google_speech','-l','en-ca',thanksfortedtalk])
+
     lux = computeIntensity("./frames/capture.jpg")/SCALE_LUX + DC_LUX
+    
     return render_template(
         "index.html",
             PACCHU = {
@@ -104,7 +114,6 @@ def loadserver():
 		"wisun_map":"https://i.imgur.com/E8EefRZ.png"
             }
     )
-
 
 @app.route("/w")
 def loadwisun():
@@ -158,13 +167,11 @@ def loadwisun():
             }
     )
 
-
 def runserver(ip,port):
     app.run(ip,port)
-    
 
 logg.debug("Flask Server running on " + str(os.getpid()))
 
 if(__name__ == "__main__"):
-    print(handle_sounddb())
-    #app.run("0.0.0.0","42069")
+    print("Consider not running the server as standalone please run ./paco.py")
+    app.run("0.0.0.0","42069")

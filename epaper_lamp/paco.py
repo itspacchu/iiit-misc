@@ -34,7 +34,7 @@ import logging
 # Settings
 
 CONTRAST = 250
-SLEEP_TIME = 300 #seconds
+SLEEP_TIME = 1200 #seconds
 
 
 # Enable logging 
@@ -104,8 +104,6 @@ if(__name__ == "__main__"):
             log.debug("Connecting to flask server")
             render_webpage("http://0.0.0.0:8000/")
             log.debug(f"Refreshing screen in {SLEEP_TIME} seconds")
-            sleep(SLEEP_TIME)
-            render_webpage("http://0.0.0.0:8000/w")
             sleep(SLEEP_TIME)
         except Exception as e:
             log.error(f"Exception {e} has occured \n Stopping Server process and epaper process")
