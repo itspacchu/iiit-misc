@@ -1,9 +1,10 @@
 #!/bin/python3
 from flask import Flask,render_template,request
+from PIL import Image,ImageStat
 from onem2m import *
 import os
 import logging
-from processing import computeIntensity
+# from processing import computeIntensity
 import subprocess
 
 # from soundmeter import sound_dB # Broken cutils
@@ -19,7 +20,12 @@ app = Flask(__name__,
             template_folder='./templates')
 
 
-
+def computeIntensity(imgPath):
+    "Compute Percieved brightness with RMS"
+    im = Image.open(imgPath)
+    stat = ImageStat.Stat(im)
+    r,g,b = stat.mean
+    return math.sqrt(0.241*(r**2) + 0.691*(g**2) + 0.068*(b**2))
 
 def handle_sounddb():
     os.seteuid(65534)
@@ -71,7 +77,6 @@ def loadserver():
     logg.debug("handling speech now")
     thanksfortedtalk = "Welcome to Smart Pole, The Current temperature is " + str(round(aqi_node['temp'])) + " degree Centigrade , with Relative Humidity of " + str(round(aqi_node['rH'])) + "%, The current Air Quality is " + str(round(aqi_node["AQI"]) + "," + rain_check
     subprocess.run(['sudo','google_speech','-l','en-ca',thanksfortedtalk])
-
     lux = computeIntensity("./frames/capture.jpg")/SCALE_LUX + DC_LUX
 
     return render_template(
