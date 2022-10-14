@@ -68,10 +68,7 @@ def render_webpage(url:str="https://smartcitylivinglab.iiit.ac.in/home/"):
     subprocess.run(['chromium','--headless','--disable-gpu','--screenshot','--window-size=480,800','--no-sandbox',url])
     webpage = Image.open("screenshot.png").convert("RGB").transpose(Image.ROTATE_90)
     webpage = change_contrast(webpage,CONTRAST)
-    #r = webpage.split()[0]
-    #r.point( lambda p: 255 - (10*p) if ((p >= 200) and (p < 240)) else 255 ).convert("1").save("screenshot_r.bmp")
     webpage.convert("1").save("screenshot_b.bmp")
-    #epd("./images/null.bmp","./screenshot_b.bmp")
     epd(f"{os.getcwd()}/screenshot_b.bmp")
     os.remove(f"{os.getcwd()}/screenshot_b.bmp") # remove screenshots 
 
@@ -84,9 +81,6 @@ def db_save():
     os.system('./db_save.sh')
 
 if(__name__ == "__main__"):
-    """
-    main event loop
-    """
     log.debug("Starting Flask Server in a different process")
     cds = Process(target=app.run,args=("0.0.0.0","8000"))
     log.debug("Starting Camera Stream saver")
