@@ -83,8 +83,47 @@ def loadserver():
         water_flow = WaterFlow("AE-WM/WM-WF","WM-WF-PH03-02").getData()
         sound_intensity = handle_sounddb()
     except Exception as e:
-        print("Skipping screen update due to error in onem2m")
-        return 0
+        print(e)
+        return render_template(
+            "index.html",
+                PACCHU = {
+                    "dB":42,
+                    "lux":30,
+                },
+                AIRQ = {
+                    "emoji":"☁",
+                    "temp":28,
+                    "AQI":80,
+                    "hum":23
+                },
+            NODES=[
+                    {
+                        "NAME":"Solar Power Generated",
+                        "LOC":"VINDHYA",
+                        "DATA":0,
+                        "UNIT":"kwh"
+                    },
+                    {
+                        "NAME":"Water Quality - TDS",
+                        "LOC":"PUMP HOUSE 03",
+                        "DATA":0,
+                        "UNIT":"ppm"
+                    },
+                    {
+                        "NAME":"Water Flow Measured",
+                        "LOC":"PUMP HOUSE 02",
+                        "DATA":0,
+                        "UNIT":"m^3"
+                    }
+                ],
+                IMAGES={
+                    "iiith_logo":"https://upload.wikimedia.org/wikipedia/en/e/e1/International_Institute_of_Information_Technology%2C_Hyderabad_logo.png",
+                    "scrc_logo":"https://i.imgur.com/okNJq1H.png",
+            "wisun_logo":"https://www.st.com/content/dam/category-pages/wireless-connectivity/logos/wisun-logo.png",
+                    "main_map":"https://i.imgur.com/ErhKofl.png",
+            "wisun_map":"https://i.imgur.com/E8EefRZ.png"
+                }
+    )
 
     sayData(aqi_node,solar_node,water_node,water_flow)
     lux = computeIntensity("/home/paco/frames/capture.jpg")/SCALE_LUX + DC_LUX
