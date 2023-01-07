@@ -83,15 +83,8 @@ def loadserver():
         water_flow = WaterFlow("AE-WM/WM-WF","WM-WF-PH03-02").getData()
         sound_intensity = handle_sounddb()
     except Exception as e:
-        aqi_node = {
-            "temp":32,
-            "AQI":100,
-            "rH":32
-        },
-        solar_node = {"energy":100}
-        water_node = {"Compensated_TDS_value":10,"Total_Flow":1000}
-        sound_intensity = 40
-        water_flow = {"Total_Flow":1000}
+        print("Skipping screen update due to error in onem2m")
+        return 0
 
     sayData(aqi_node,solar_node,water_node,water_flow)
     lux = computeIntensity("/home/paco/frames/capture.jpg")/SCALE_LUX + DC_LUX
