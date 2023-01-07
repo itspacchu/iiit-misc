@@ -91,7 +91,7 @@ def loadserver():
         solar_node = {"energy":100}
         water_node = {"Compensated_TDS_value":10,"Total_Flow":1000}
         sound_intensity = 40
-	water_flow = 1000
+        water_flow = {"Total_Flow":1000}
 
     sayData(aqi_node,solar_node,water_node,water_flow)
     lux = computeIntensity("/home/paco/frames/capture.jpg")/SCALE_LUX + DC_LUX
